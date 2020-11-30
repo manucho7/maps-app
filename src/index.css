@@ -7,3 +7,14 @@
     right: 0;
     top: 0;
 }
+
+.info {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    color: gold;
+    left: 20px;
+    padding: 10px;
+    position: fixed;
+    top: 20px;
+    z-index: 99;
+}

@@ -16,23 +16,39 @@ export const MapaPage = () => {
 
     const mapaDiv = useRef();
 
-    const [, setMapa] = useState(null);
+    const [mapa, setMapa] = useState();
+    const [coords, setCoords] = useState( puntoInicial );
 
     useEffect(() => {
-
         const map = new mapboxgl.Map({
             container: mapaDiv.current,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [ puntoInicial.lng, puntoInicial.lat ],
             zoom: puntoInicial.zoom
         });
-
         setMapa(map);
+    }, []);
 
-    }, [])
+    //Cuando se mueve el mapa. Usando ? como condicional para ver si tiene valor la variable mapa
+    useEffect(() => {
+        mapa?.on('move', () => {
+            const {lng, lat} = mapa.getCenter();
+            
+            setCoords({
+                lng: lng.toFixed(4),
+                lat: lat.toFixed(4),
+                zoom: mapa.getZoom().toFixed(2)
+            });
+        });
+
+    }, [mapa])
 
     return (
         <>
+            <div className="info">
+                lng: {coords.lng} | lat: {coords.lat} | zoom: {coords.zoom}
+            </div>
+
             <div
                 ref={ mapaDiv }
                 className="mapContainer"
