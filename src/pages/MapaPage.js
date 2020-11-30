@@ -16,7 +16,8 @@ export const MapaPage = () => {
 
     const mapaDiv = useRef();
 
-    const [mapa, setMapa] = useState();
+    // const [mapa, setMapa] = useState();
+    const mapa = useRef();
     const [coords, setCoords] = useState( puntoInicial );
 
     useEffect(() => {
@@ -26,22 +27,23 @@ export const MapaPage = () => {
             center: [ puntoInicial.lng, puntoInicial.lat ],
             zoom: puntoInicial.zoom
         });
-        setMapa(map);
+
+        mapa.current = map;
     }, []);
 
     //Cuando se mueve el mapa. Usando ? como condicional para ver si tiene valor la variable mapa
     useEffect(() => {
-        mapa?.on('move', () => {
-            const {lng, lat} = mapa.getCenter();
+        mapa.current?.on('move', () => {
+            const {lng, lat} = mapa.current.getCenter();
             
             setCoords({
                 lng: lng.toFixed(4),
                 lat: lat.toFixed(4),
-                zoom: mapa.getZoom().toFixed(2)
+                zoom: mapa.current.getZoom().toFixed(2)
             });
         });
 
-    }, [mapa])
+    }, []);
 
     return (
         <>
