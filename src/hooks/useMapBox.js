@@ -21,7 +21,6 @@ export const useMapBox = (puntoInicial) => {
 
     //Observables RXJS
     const movimientoMarcador = useRef(new Subject());
-
     const nuevoMarcador = useRef(new Subject());
 
     //Mapa y coords
@@ -55,8 +54,8 @@ export const useMapBox = (puntoInicial) => {
             const { id } = target;
             const { lng, lat } = target.getLngLat();
 
-            //TODO emitir los cambios del marcador via sockets
-        })
+            movimientoMarcador.current.next({id, lng, lat});
+        });
     },[]);
 
 
@@ -95,6 +94,7 @@ export const useMapBox = (puntoInicial) => {
         setRef,
         marcadores,
         agregarMarcador,
-        nuevoMarcador$: nuevoMarcador.current
+        nuevoMarcador$: nuevoMarcador.current,
+        movimientoMarcador$: movimientoMarcador.current
     }
 }

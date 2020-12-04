@@ -12,13 +12,20 @@ const puntoInicial = {
 
 export const MapaPage = () => {
 
-    const { setRef, coords, nuevoMarcador$ } = useMapBox(puntoInicial);
+    const { setRef, coords, nuevoMarcador$, movimientoMarcador$ } = useMapBox(puntoInicial);
 
     useEffect(() => {
         nuevoMarcador$.subscribe( marcador => {
             console.log(marcador);
         });
     }, [nuevoMarcador$]);
+
+
+    useEffect(() => {
+        movimientoMarcador$.subscribe( marcador => {
+            console.log(marcador.id);
+        });
+    }, [movimientoMarcador$]);
 
     return (
         <>
