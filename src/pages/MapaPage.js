@@ -13,17 +13,18 @@ const puntoInicial = {
 export const MapaPage = () => {
 
     const { setRef, coords, nuevoMarcador$, movimientoMarcador$ } = useMapBox(puntoInicial);
-
+    
+    //Observable new marker
     useEffect(() => {
         nuevoMarcador$.subscribe( marcador => {
-            console.log(marcador);
+            // console.log(marcador);
         });
     }, [nuevoMarcador$]);
 
-
+    //Observable movimiento de marcador
     useEffect(() => {
         movimientoMarcador$.subscribe( marcador => {
-            console.log(marcador.id);
+            // console.log(marcador.id);
         });
     }, [movimientoMarcador$]);
 
