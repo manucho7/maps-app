@@ -42,7 +42,7 @@ export const useMapBox = (puntoInicial) => {
         
         marcadores.current[marker.id] = marker;
 
-        //TODO:marcador con id, no emitir
+        //objeto marcador con id, lng, lat, recibido por subscribe en mapapage
         nuevoMarcador.current.next({
             id: marker.id,
             lng, 
