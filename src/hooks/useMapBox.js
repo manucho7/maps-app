@@ -60,6 +60,11 @@ export const useMapBox = (puntoInicial) => {
         });
     },[]);
 
+    //Funcion para actualizar la ubic del marcador
+    const actualizarPosicion = useCallback( ({id, lng, lat}) => {
+        marcadores.current[id].setLngLat([lng, lat]);
+    }, [])
+
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -97,6 +102,7 @@ export const useMapBox = (puntoInicial) => {
         marcadores,
         agregarMarcador,
         nuevoMarcador$: nuevoMarcador.current,
-        movimientoMarcador$: movimientoMarcador.current
+        movimientoMarcador$: movimientoMarcador.current,
+        actualizarPosicion
     }
 }
